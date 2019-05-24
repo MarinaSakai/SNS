@@ -15,7 +15,7 @@
         <div class="post-right">
           <div class="post-user-name">
             <% @user = User.select("name").find_by(id: @post.user_id) %>
-            <%= @user.name %>
+            <%= link_to @user.name, user_path(@post.user_id) %>
           </div>
           <div class="date">
             <%= l(@post.created_at, format: :short) %>
@@ -23,9 +23,7 @@
           <%= @post.content %>
         </div>
         <% @post.images.each do |post_photo| %>
-          <a href="<%=post_photo%>">
             <div class="post_photo" style="background:url('<%= post_photo %>') center / contain; background-repeat:no-repeat;"></div>
-          </a>
         <% end %>
       </div>
 

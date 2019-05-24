@@ -34,6 +34,7 @@
     position:relative; float: right; width: 90%; padding-left: 25px;
     box-sizing: border-box; text-align: left;
     .post-user-name {font-weight: 600;}
+    .post-user-name a {text-decoration: none; color: black;}
     .post-user-name a:hover {color: #1da1f2;}
     .post_content {
       text-decoration: none; color: black;
@@ -95,14 +96,9 @@ input.new_post_submit:focus {
 
 .new_post{
   input.new_post_submit{
-    padding:10px 20px;
-    background-color: #6bc7ff;
-    border-radius:20px;
-    color:white;
-    border:none;
-    text-shadow: none;
-    font-weight:bold; font-size: 15px;
-    position: absolute;
+    padding:10px 20px; background-color: #6bc7ff; border-radius:20px;
+    color:white; border:none; text-shadow: none;
+    font-weight:bold; font-size: 15px; position: absolute;
     bottom:20px; right:20px;
   }
 
