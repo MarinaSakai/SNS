@@ -1,0 +1,18 @@
+<div class="background-box">
+  <div class="show_users">
+    <div class="header">
+      <div class="logo"><img src="<%= "/duck.png" %>"></div>
+      <%= link_to posts_path, :class=>"back_to_posts" do %>
+        <i class="fas fa-home"></i> <span class="home_button">Home</span>
+      <% end %>
+    </div>
+
+    <div class="user">
+      <div class="user_inner">
+        <img src="<%= "/user_images/#{@user.image_name}" %>">
+        <span class="user_name"><%= @user.name %></span>
+      </div>
+    </div>
+
+  </div>
+</div>

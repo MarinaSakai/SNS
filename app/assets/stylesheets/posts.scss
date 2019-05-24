@@ -1,0 +1,180 @@
+// Place all the styles related to the posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* home */
+.posts-tabs {
+  box-sizing: border-box; width: 60%; margin: 20px auto 0; padding: 0;
+  background-color: white; overflow: hidden; box-shadow: 0 2px 6px lightgray;
+  li {
+    display: block; text-align: center; list-style: none; float: left;
+  }
+  li.active {
+    // border-bottom: 2px solid #3ecdc6;
+    border-bottom: 2px solid #1da1f2;
+    a {color: #57575f;}
+  }
+  a {
+    text-decoration: none; display: inline-block; padding: 16px 30px;
+    color: #afb6bf;
+  }
+  a:hover {text-decoration: none;}
+}
+
+.posts-index-item {
+  box-sizing: border-box; width: 60%; margin: 0 auto; padding: 20px 20px;
+  background-color: white; overflow: hidden; box-shadow: 0 2px 6px lightgray;
+  .post-left {
+    float: left; width: 10%; box-sizing: border-box;
+    img {
+      width: 50px; height: 50px; border-radius: 50%; object-fit: cover;
+    }
+  }
+  .post-right {
+    position:relative; float: right; width: 90%; padding-left: 25px;
+    box-sizing: border-box; text-align: left;
+    .post-user-name {font-weight: 600;}
+    .post-user-name a:hover {color: #1da1f2;}
+    .post_content {
+      text-decoration: none; color: black;
+    }
+    .date {
+      color: rgb(89, 90, 98); font-size: 3px;
+      position:absolute; right:20px; top:7px; box-sizing: border-box;
+    }
+  }
+}
+
+.post_photo {
+  width:150px; height:100px; display:inline-block;
+  // border:1px solid rgb(221, 221, 221);
+  margin: 10px 0 0; border-radius: 5%; box-shadow: 0 0 5px lightgray;
+}
+/* //home */
+
+/* show */
+.show_post{
+  .posts-index-item {
+    margin: 30px auto;
+  }
+}
+/* //show */
+
+/* new */
+.back_to_posts {
+  position:absolute; left:15px; top: 15px;
+  color: white; text-decoration:none; font-size: 20px;
+  .home_button {
+    font-family: 'Lato', sans-serif; font-size: 18px;
+  }
+}
+
+.new_post_field {
+  width: 60%;  padding: 30px; margin: 5em auto;
+  border-radius:20px; background-color:white;
+  box-shadow: 0 0 8px lightgray; box-sizing:border-box;
+  position: relative;
+}
+
+input.new_post_submit{
+  padding:10px 20px;
+  background-color: #6bc7ff;
+  border-radius:20px;
+  color:white;
+  border:none;
+  text-shadow: none;
+  font-weight:bold; font-size: 15px;
+}
+
+input.new_post_submit:hover{
+  background-color: #1da1f2; cursor: pointer;
+}
+input.new_post_submit:focus {
+  outline: 0;
+}
+
+.new_post{
+  input.new_post_submit{
+    padding:10px 20px;
+    background-color: #6bc7ff;
+    border-radius:20px;
+    color:white;
+    border:none;
+    text-shadow: none;
+    font-weight:bold; font-size: 15px;
+    position: absolute;
+    bottom:20px; right:20px;
+  }
+
+  input.new_post_submit:hover{
+    background-color: #1da1f2; cursor: pointer;
+  }
+  input.new_post_submit:focus {
+    outline: 0;
+  }
+
+// check box
+  @keyframes click-wave {
+  	0% {
+  		position: relative; width: 30px; height: 30px; opacity: 0.35;
+  	}
+  	100% {
+  		width: 100px; height: 100px; margin-top: -80px; margin-left: -80px;
+  		opacity: 0;
+  	}
+  }
+  .cp_ipradio input {
+  	position: relative;	top: 8px;	right: 0;	bottom: 0; left: 0;
+    width: 20px; height: 20px; margin-right: 0.5rem; cursor: pointer;
+  	transition: all 0.15s ease-out 0s; color: #ffffff; border: none; outline: none;
+  	background: #d7cbcb; -webkit-appearance: none; appearance: none;
+  }
+  .cp_ipradio input:hover {background: #a9c9d6;}
+  .cp_ipradio input:checked {background: #1da1f2;}
+  .cp_ipradio input:checked::before {
+  	font-size: 15px; line-height: 20px; position: absolute; display: inline-block;
+  	width: 20px; height: 20px; content: '✔'; text-align: center;
+  }
+  .cp_ipradio input:checked::after {
+  	position: relative; display: block; content: '';
+    -webkit-animation: click-wave 0.65s; animation: click-wave 0.65s;
+  	background: #3cb9da;
+  }
+  .cp_ipradio label {
+  	line-height: 40px; display: block;
+  }
+
+}
+
+a.select_scope_style{
+  position:absolute; right:30px; bottom:25px; padding:10px 20px;
+  background-color: #6bc7ff; border-radius:20px;
+  color:white; border:none; text-shadow: none; font-weight:bold;
+  font-size: 15px;
+}
+a.select_scope_style:hover{background-color: #1da1f2; cursor: pointer;}
+a.select_scope_style:focus {outline: 0;}
+
+.select_scope{
+  display:none; position:fixed; top:50%; left:50%;
+  transform:translate(-50%, -50%); width:500px; height:300px;
+  background-color:white; padding:50px; box-sizing:border-box;
+}
+.select_scope_back{
+  display:none; position:fixed; top:0; left:0;
+  width:100vw; height:100vh; background-color:rgba(0, 0, 0, 0.56);
+}
+.select_scope_back_button{
+  position:absolute; top:10px; right:20px; color:rgb(89, 89, 89);
+  font-size:20px; cursor: pointer;
+}
+
+textarea.new_post_form {
+  width:100%; height:150px; padding: 10px; box-sizing:border-box;
+  border:3px solid rgb(193, 229, 255);
+  border-radius:10px; font-size: 1em; resize:none;
+}
+textarea.new_post_form::placeholder{color:rgb(198, 198, 198);}
+textarea.new_post_form:focus {
+  outline: 0; border:3px solid rgb(193, 229, 255);
+}

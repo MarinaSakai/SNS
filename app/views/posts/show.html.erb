@@ -1,0 +1,34 @@
+<div class="background-box">
+  <div class="show_post">
+    <div class="header">
+      <span class="title">Post</span>
+      <%= link_to posts_path, :class=>"back_to_posts" do %>
+        <i class="fas fa-home"></i> <span class="home_button">Home</span>
+      <% end %>
+    </div>
+
+      <div class="posts-index-item">
+        <div class="post-left">
+          <% @image = User.select("image_name").find_by(id: @post.user_id) %>
+          <img src="<%= "/user_images/#{@image.image_name}" %>">
+        </div>
+        <div class="post-right">
+          <div class="post-user-name">
+            <% @user = User.select("name").find_by(id: @post.user_id) %>
+            <%= @user.name %>
+          </div>
+          <div class="date">
+            <%= l(@post.created_at, format: :short) %>
+          </div>
+          <%= @post.content %>
+        </div>
+        <% @post.images.each do |post_photo| %>
+          <a href="<%=post_photo%>">
+            <div class="post_photo" style="background:url('<%= post_photo %>') center / contain; background-repeat:no-repeat;"></div>
+          </a>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

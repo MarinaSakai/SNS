@@ -1,0 +1,43 @@
+<div class="background-box">
+<div class="page">
+  <div class="header">
+    <span class="title">Home</span>
+    <%= link_to "Logout", destroy_user_session_path, method: :delete, :class=> "logout" %>
+    <%= link_to user_path(current_user) do %>
+      <img class="my_image" src="<%= "/user_images/#{@user.image_name}" %>">
+    <% end %>
+    <%= link_to "Post", new_post_path, :class=> "new_post",data: {"turbolinks"=>false} %>
+  </div>
+
+  <ul class="posts-tabs">
+      <li><%= link_to("All", posts_path) %></li>
+      <li class="active"><%= link_to("Follows", follows_posts_path) %></li>
+  </ul>
+
+  <% @posts_follows.each do |post_follows| %>
+    <div class="posts-index-item">
+      <div class="post-left">
+        <% @image = User.select("image_name").find_by(id: post_follows.user_id) %>
+        <%= link_to user_path(post_follows.user_id) do %>
+          <img src="<%= "/user_images/#{@image.image_name}" %>">
+        <% end %>
+      </div>
+      <div class="post-right">
+        <div class="post-user-name">
+          <% @user = User.select("name").find_by(id: post_follows.user_id) %>
+          <%= @user.name %>
+        </div>
+        <div class="date">
+          <%= l(post_follows.created_at, format: :short) %>
+        </div>
+        <%= link_to post_follows.content, post_path(post_follows), :class=> "post_content" %>
+      </div>
+      <% post_follows.images.each do |post_photo| %>
+        <a href="<%=post_photo%>">
+          <div class="post_photo" style="background:url('<%= post_photo %>') center / contain; background-repeat:no-repeat;"></div>
+        </a>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+</div>
