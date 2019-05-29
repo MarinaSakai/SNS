@@ -1,5 +1,5 @@
 <div class="background-box">
-  <div class="show_users">
+  <div class="edit_users">
     <div class="header">
       <span class="title">Edit Profile</span>
       <%= link_to posts_path, :class=>"back_to_posts" do %>
@@ -7,6 +7,17 @@
       <% end %>
     </div>
 
+    <div class="container">
+      <%= form_for(@user, :html => {:multipart => true}) do  |f| %>
+        <p>Name</p>
+        <%= f.text_field :name %>
+        <p>Image</p>
+        <%= f.file_field :image %>
+        <p>Email</p>
+        <%= f.email_field :email %>
+        <%= f.submit "Save" %>
+      <% end %>
+    </div>
 
   </div>
 </div>
