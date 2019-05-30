@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Posts::CommentsController < ApplicationController
   def new
     @post = Post.find_by(id: params[:post_id])
@@ -11,8 +13,9 @@ class Posts::CommentsController < ApplicationController
   end
 
   private
-    def create_params
-      params.require(:comment).permit(:content).merge(post_id: @post.id, user_id: current_user.id)
-    end
 
+  def create_params
+    params.require(:comment).permit(:content)
+          .merge(post_id: @post.id, user_id: current_user.id)
+  end
 end
