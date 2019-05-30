@@ -12,7 +12,7 @@ class Posts::CommentsController < ApplicationController
 
   private
     def create_params
-      params.require(:comment).permit(:content).merge(post_id: @post.id, user_id: current_user)
+      params.require(:comment).permit(:content).merge(post_id: @post.id, user_id: current_user.id)
     end
 
 end

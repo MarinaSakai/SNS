@@ -92,6 +92,10 @@ body {
   position:absolute; left:10px; top: 15px;
   color: white; text-decoration:none;
 }
+.header .back_to_post {
+  position:absolute; left:10px; top: 15px;
+  color: white; text-decoration:none;
+}
 /* //header */
 
 a.new_post {
