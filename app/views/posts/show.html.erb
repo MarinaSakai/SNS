@@ -31,32 +31,31 @@
     </div>
 
     <div class="comments">
-        <% if @post.comments.any? %>
-          <% @post.comments.each do |comment| %>
-          <div class="posts-index-item">
-            <div class="post-left">
-              <% @image = User.select("image_name").find_by(id: comment.user_id) %>
-              <img src="<%= "/user_images/#{@image.image_name}" %>">
-            </div>
-            <div class="post-right">
-              <div class="post-user-name">
-                <% @user = User.select("name").find_by(id: comment.user_id) %>
-                <%= link_to @user.name, user_path(comment.user_id) %>
-              </div>
-              <div class="date">
-                <%= l(comment.created_at, format: :short) %>
-              </div>
-              <div class="reply_to">
-                <% @post_reply = Post.select("user_id").find_by(id: comment.post_id) %>
-                <% @user = User.select("name").find_by(id: @post_reply.user_id) %>
-                reply to <%= @user.name %>
-              </div>
-              <%= comment.content %>
-            </div>
+    <% if @post.comments.any? %>
+      <% @post.comments.each do |comment| %>
+      <div class="posts-index-item">
+        <div class="post-left">
+          <% @image = User.select("image_name").find_by(id: comment.user_id) %>
+          <img src="<%= "/user_images/#{@image.image_name}" %>">
+        </div>
+        <div class="post-right">
+          <div class="post-user-name">
+            <% @user = User.select("name").find_by(id: comment.user_id) %>
+            <%= link_to @user.name, user_path(comment.user_id) %>
           </div>
-          <% end %>
-        <% end %>
+          <div class="date">
+            <%= l(comment.created_at, format: :short) %>
+          </div>
+          <div class="reply_to">
+            <% @post_reply = Post.select("user_id").find_by(id: comment.post_id) %>
+            <% @user = User.select("name").find_by(id: @post_reply.user_id) %>
+            reply to <%= @user.name %>
+          </div>
+          <%= comment.content %>
+        </div>
+      </div>
+      <% end %>
+    <% end %>
     </div>
-
   </div>
 </div>
