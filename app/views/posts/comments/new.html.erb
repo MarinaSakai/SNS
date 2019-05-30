@@ -1,9 +1,14 @@
 <div class="background-box">
   <div class="header">
     <span class="title">Reply</span>
-    <%= link_to "back", post_path(params[:post_id]), :class=>"new_reply"%>
+    <%= link_to "back", post_path(params[:post_id]), :class=>"back_to_post"%>
   </div>
-  <div class="new_reply_field">
-    
+
+  <div class="new_post_field">
+    <%= form_for [@post, @comment] do |f| %>
+      <%= f.text_area :content, class: "new_post_form", placeholder: "Post your reply" %>
+      <%= f.submit "Post",:class=>"new_post_submit"%>
+    <% end %>
   </div>
+
 </div>
