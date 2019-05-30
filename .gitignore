@@ -23,9 +23,7 @@
 /public/assets
 .byebug_history
 
-/public/user_images
 /public/uploads
-/public/duck.png
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
