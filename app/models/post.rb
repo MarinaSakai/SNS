@@ -5,4 +5,5 @@ class Post < ApplicationRecord
   validates :images, length: { maximum: 3 }
   mount_uploaders :images, ImageUploader
   has_many :comments
+  has_many :favs_posts
 end
