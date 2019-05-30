@@ -46,6 +46,15 @@
   }
 }
 
+.comments {
+  .posts-index-item::after {
+    content: ""; display: block; clear: both;
+  }
+  .reply_to {
+    color: gray; font-size: 5px;
+  }
+}
+
 .post_photo {
   width:150px; height:100px; display:inline-block;
   // border:1px solid rgb(221, 221, 221);
