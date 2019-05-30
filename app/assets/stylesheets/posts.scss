@@ -24,6 +24,7 @@
 .posts-index-item {
   box-sizing: border-box; width: 60%; margin: 0 auto; padding: 20px 20px;
   background-color: white; overflow: hidden; box-shadow: 0 2px 6px lightgray;
+  position: relative;
   .post-left {
     float: left; width: 10%; box-sizing: border-box;
     img {
@@ -43,6 +44,11 @@
       color: rgb(89, 90, 98); font-size: 3px;
       position:absolute; right:20px; top:7px; box-sizing: border-box;
     }
+  }
+  .reply_link {
+    position:absolute; right:40px; bottom:20px;
+    a {text-decoration: none; color: #4cb0ed}
+    a:hover {color: #1da1f2}
   }
 }
 
