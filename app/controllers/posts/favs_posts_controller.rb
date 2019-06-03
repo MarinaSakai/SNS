@@ -9,7 +9,6 @@ class Posts::FavsPostsController < ApplicationController
     @back_url = session[:previous_url]
 
     redirect_to @back_url
-    #redirect_to posts_path
   end
 
   def destroy

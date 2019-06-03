@@ -21,13 +21,27 @@
           <%= l(@post.created_at, format: :short) %>
         </div>
         <%= @post.content %>
+        <div>
+        <% @post.images.each do |post_photo| %>
+        <div class="post_photo" style="background:url('<%= post_photo %>') center / contain; background-repeat:no-repeat;"></div>
+        <% end %>
+        </div>
+        <div class="fav">
+            <% if @fav_post = FavsPost.find_by(post_id: @post.id, user_id: current_user.id) %>
+            <%= link_to(post_favs_post_path(@post.id, @fav_post.id), :method => :delete) do %>
+            <i class="far fa-heart unlike-btn">like</i>
+            <% end %>
+            <% else %>
+            <%= link_to(post_favs_posts_path(@post.id), :method => :post) do %>
+            <i class="far fa-heart like-btn"></i>
+            <% end %>
+          <% end %>
+        </div>
       </div>
-      <% @post.images.each do |post_photo| %>
-          <div class="post_photo" style="background:url('<%= post_photo %>') center / contain; background-repeat:no-repeat;"></div>
-      <% end %>
       <div class="reply_link">
         <%= link_to "reply",  new_post_comment_path(@post) %>
       </div>
+
     </div>
 
     <div class="comments">
