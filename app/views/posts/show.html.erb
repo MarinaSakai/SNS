@@ -66,6 +66,17 @@
             reply to <%= @user.name %>
           </div>
           <%= comment.content %>
+          <div class="fav">
+              <% if @fav_comment = FavsComment.find_by(comment_id: comment.id, user_id: current_user.id) %>
+              <%= link_to(post_comment_favs_comment_path(@post.id, comment.id, @fav_comment.id), :method => :delete) do %>
+              <i class="far fa-heart unlike-btn">like</i>
+              <% end %>
+              <% else %>
+              <%= link_to(post_comment_favs_comments_path(@post.id, comment.id), :method => :post) do %>
+              <i class="far fa-heart like-btn"></i>
+              <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
       <% end %>
