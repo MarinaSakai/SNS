@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :posts do
     resources :comments, controller:'posts/comments'
-    resources :favs_posts, controller:'pots/favs_posts'
+    resources :favs_posts, controller:'posts/favs_posts', except: [:index]
     collection do
       get "follows" => "posts#follows"
     end

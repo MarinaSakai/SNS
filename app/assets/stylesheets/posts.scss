@@ -44,6 +44,11 @@
       color: rgb(89, 90, 98); font-size: 3px;
       position:absolute; right:20px; top:7px; box-sizing: border-box;
     }
+    .post_photo {
+      width:150px; height:100px; display:inline-block;
+      // border:1px solid rgb(221, 221, 221);
+      margin: 10px 0 0; border-radius: 5%; box-shadow: 0 0 5px lightgray;
+    }
   }
   .reply_link {
     position:absolute; right:40px; bottom:20px;
@@ -61,11 +66,7 @@
   }
 }
 
-.post_photo {
-  width:150px; height:100px; display:inline-block;
-  // border:1px solid rgb(221, 221, 221);
-  margin: 10px 0 0; border-radius: 5%; box-shadow: 0 0 5px lightgray;
-}
+
 /* //home */
 
 /* show */
