@@ -7,7 +7,6 @@ class Posts::FavsPostsController < ApplicationController
     @fav_post = FavsPost.new(post_id: params[:post_id], user_id: current_user.id)
     @fav_post.save
     @back_url = session[:previous_url]
-
     redirect_to @back_url
   end
 
