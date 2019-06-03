@@ -1,5 +1,4 @@
 <div class="background-box">
-<div class="page">
   <div class="header">
     <span class="title">Home</span>
     <%= link_to "Logout", destroy_user_session_path, method: :delete, :class=> "logout" %>
@@ -37,23 +36,21 @@
         <div class="fav">
           <% if @fav_post = FavsPost.find_by(post_id: post_follows.id, user_id: current_user.id) %>
           <%= link_to(post_favs_post_path(post_follows.id, @fav_post.id), :method => :delete) do %>
-          <i class="far fa-heart unlike-btn">
-            <% @favs_count = FavsPost.where(post_id: post_follows.id).count %>
-            <% if @favs_count != 0 %><%= @favs_count %><% end %>
-          </i>
-          <% end %>
+            <i class="far fa-heart unlike-btn">
+              <% @favs_count = FavsPost.where(post_id: post_follows.id).count %>
+              <% if @favs_count != 0 %><%= @favs_count %><% end %>
+            </i>
+            <% end %>
           <% else %>
-          <%= link_to(post_favs_posts_path(post_follows.id), :method => :post) do %>
-          <i class="far fa-heart like-btn">
-            <% @favs_count = FavsPost.where(post_id: post_follows.id).count %>
-            <% if @favs_count != 0 %><%= @favs_count %><% end %>
-          </i>
-          <% end %>
+            <%= link_to(post_favs_posts_path(post_follows.id), :method => :post) do %>
+            <i class="far fa-heart like-btn">
+              <% @favs_count = FavsPost.where(post_id: post_follows.id).count %>
+              <% if @favs_count != 0 %><%= @favs_count %><% end %>
+            </i>
+            <% end %>
           <% end %>
         </div>
       </div>
     </div>
-  </div>
-  <% end %>
-</div>
+    <% end %>
 </div>
