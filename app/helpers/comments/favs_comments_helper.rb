@@ -1,0 +1,2 @@
+module Comments::FavsCommentsHelper
+end
