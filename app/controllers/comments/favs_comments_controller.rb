@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Comments::FavsCommentsController < ApplicationController
   before_action :save_previous_url
 
