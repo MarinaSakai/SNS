@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users, :only => [:show, :edit, :update] do
-    resources :follows, controller:'follows', except: [:new, :edit, :show, :update]
+    resources :follows, controller:'follows', except: [:index, :new, :edit, :show, :update]
+    member do
+      get "index_following" => "follows#index_following"
+      get "index_followers" => "follows#index_followers"
+    end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :posts do

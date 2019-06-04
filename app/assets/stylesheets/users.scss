@@ -4,9 +4,13 @@
   }
   .show_following {
     position:absolute; right:200px; bottom:7px; color: white; font-size: 14px;
+    font-weight: bold;
+    a {text-decoration: none;}
   }
   .show_followers {
     position:absolute; right:120px; bottom:7px; color: white; font-size: 14px;
+    font-weight: bold;
+    a {text-decoration: none;}
   }
 }
 

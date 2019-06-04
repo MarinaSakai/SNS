@@ -5,16 +5,21 @@
       <%= link_to posts_path, :class=>"back_to_posts" do %>
         <i class="fas fa-home"></i> <span class="home_button">Home</span>
       <% end %>
-      <span class="show_following">
-        Following</br>
-        <% @user = User.find_by(id: params[:id])%>
-        <%= @follows = Follow.where(user_id: @user.id).count %>
-      </span>
-      <span class="show_followers">
+      <% @user = User.find_by(id: params[:id])%>
+
+      <%= link_to index_following_user_path(@user.id) do %>
+        <div class="show_following">
+          Following</br>
+          <%= @follows = Follow.where(user_id: @user.id).count %>
+        </div>
+      <% end %>
+
+      <%= link_to index_followers_user_path(@user.id) do %>
+        <div class="show_followers">
         Followers</br>
-        <% @user = User.find_by(id: params[:id])%>
         <%= @followers = Follow.where(target_user_id: @user.id).count %>
-      </span>
+        </div>
+      <% end %>
     </div>
 
     <div class="user">
