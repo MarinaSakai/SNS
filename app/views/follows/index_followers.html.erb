@@ -5,5 +5,26 @@
       <%= link_to "back", user_path(params[:id]), :class=>"back_to_user"%>
     </div>
 
+    <div class="user-index">
+      <% @followers.each do |follower| %>
+        <div class="user-index-box">
+          <div class="user-index-item">
+            <% @user = User.find_by(id: follower.user_id) %>
+            <div class="user-left">
+              <% @image = User.select("image_name").find_by(id: @user.id) %>
+              <%= link_to user_path(@user.id) do %>
+                <img src="<%= "/user_images/#{@image.image_name}" %>">
+              <% end %>
+            </div>
+            <div class="user-right">
+              <%= link_to user_path(@user.id) do %>
+                <%= @user.name %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
   </div>
 </div>

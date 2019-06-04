@@ -10,7 +10,9 @@
     <div class="posts-index-item">
       <div class="post-left">
         <% @image = User.select("image_name").find_by(id: @post.user_id) %>
-        <img src="<%= "/user_images/#{@image.image_name}" %>">
+        <%= link_to user_path(@post.user_id) do %>
+          <img src="<%= "/user_images/#{@image.image_name}" %>">
+        <% end %>
       </div>
       <div class="post-right">
         <div class="post-user-name">
@@ -56,7 +58,9 @@
       <div class="posts-index-item">
         <div class="post-left">
           <% @image = User.select("image_name").find_by(id: comment.user_id) %>
-          <img src="<%= "/user_images/#{@image.image_name}" %>">
+          <%= link_to user_path(comment.user_id) do %>
+            <img src="<%= "/user_images/#{@image.image_name}" %>">
+          <% end %>
         </div>
         <div class="post-right">
           <div class="post-user-name">
