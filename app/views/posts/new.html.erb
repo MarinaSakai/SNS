@@ -1,12 +1,11 @@
 <div class="background-box">
   <div class="new_post">
-    <div class="page">
-      <div class="header">
-        <span class="title">Create Post</span>
-        <%= link_to posts_path, :class=>"back_to_posts" do %>
-          <i class="fas fa-home"></i> <span class="home_button">Home</span>
-        <% end %>
-      </div>
+  <div class="header">
+    <span class="title">Create Post</span>
+    <%= link_to posts_path, :class=>"back_to_posts" do %>
+      <i class="fas fa-home"></i> <span class="home_button">Home</span>
+    <% end %>
+  </div>
 
   <div class="new_post_field">
     <%= form_for @post do |f| %>
@@ -35,6 +34,5 @@
       <div style="width:100%; height:40px;"></div>
     <% end %>
   </div>
-</div>
 </div>
 </div>

@@ -11,21 +11,19 @@
 
   <ul class="posts-tabs">
       <li class="active"><%= link_to("All", "/posts") %></li>
-      <li><%= link_to("Follows", "/posts/follows") %></li>
+      <li><%= link_to("Following", "/posts/follows") %></li>
   </ul>
 
   <% @posts_all.each do |post_all| %>
     <div class="posts-index-item">
       <div class="post-left">
         <% @image = User.select("image_name").find_by(id: post_all.user_id) %>
-        <%= link_to user_path(post_all.user_id) do %>
-          <img src="<%= "/user_images/#{@image.image_name}" %>">
-        <% end %>
+        <img src="<%= "/user_images/#{@image.image_name}" %>">
       </div>
       <div class="post-right">
         <div class="post-user-name">
           <% @user = User.select("name").find_by(id: post_all.user_id) %>
-          <%= @user.name %>
+          <%= link_to @user.name, user_path(post_all.user_id) %>
         </div>
         <div class="date">
           <%= l(post_all.created_at, format: :short) %>
@@ -33,9 +31,7 @@
         <%= link_to post_all.content, post_path(post_all), :class=> "post_content" %>
       </div>
       <% post_all.images.each do |post_photo| %>
-        <a href="<%=post_photo%>">
           <div class="post_photo" style="background:url('<%= post_photo %>') center / contain; background-repeat:no-repeat;"></div>
-        </a>
       <% end %>
     </div>
   <% end %>

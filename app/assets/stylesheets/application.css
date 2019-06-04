@@ -18,7 +18,7 @@ body {
   padding:0!important; margin:0!important;
 }
 .background-box{
-  width:100%; min-height:100vh; margin:0;
+  width:100%; min-height:100vh; margin:0; padding-bottom:10px;
   background:linear-gradient(-135deg, white, rgb(186, 230, 255));
 }
 .error {color: red;}
@@ -89,6 +89,10 @@ body {
   position:absolute; right:100px; top:7px; width:45px; border-radius:50%;
 }
 .header .logout {
+  position:absolute; left:10px; top: 15px;
+  color: white; text-decoration:none;
+}
+.header .back_to_post {
   position:absolute; left:10px; top: 15px;
   color: white; text-decoration:none;
 }

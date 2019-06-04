@@ -7,28 +7,55 @@
       <% end %>
     </div>
 
+    <div class="posts-index-item">
+      <div class="post-left">
+        <% @image = User.select("image_name").find_by(id: @post.user_id) %>
+        <img src="<%= "/user_images/#{@image.image_name}" %>">
+      </div>
+      <div class="post-right">
+        <div class="post-user-name">
+          <% @user = User.select("name").find_by(id: @post.user_id) %>
+          <%= link_to @user.name, user_path(@post.user_id) %>
+        </div>
+        <div class="date">
+          <%= l(@post.created_at, format: :short) %>
+        </div>
+        <%= @post.content %>
+      </div>
+      <% @post.images.each do |post_photo| %>
+          <div class="post_photo" style="background:url('<%= post_photo %>') center / contain; background-repeat:no-repeat;"></div>
+      <% end %>
+      <div class="reply_link">
+        <%= link_to "reply",  new_post_comment_path(@post) %>
+      </div>
+    </div>
+
+    <div class="comments">
+    <% if @post.comments.any? %>
+      <% @post.comments.each do |comment| %>
       <div class="posts-index-item">
         <div class="post-left">
-          <% @image = User.select("image_name").find_by(id: @post.user_id) %>
+          <% @image = User.select("image_name").find_by(id: comment.user_id) %>
           <img src="<%= "/user_images/#{@image.image_name}" %>">
         </div>
         <div class="post-right">
           <div class="post-user-name">
-            <% @user = User.select("name").find_by(id: @post.user_id) %>
-            <%= @user.name %>
+            <% @user = User.select("name").find_by(id: comment.user_id) %>
+            <%= link_to @user.name, user_path(comment.user_id) %>
           </div>
           <div class="date">
-            <%= l(@post.created_at, format: :short) %>
+            <%= l(comment.created_at, format: :short) %>
           </div>
-          <%= @post.content %>
+          <div class="reply_to">
+            <% @post_reply = Post.select("user_id").find_by(id: comment.post_id) %>
+            <% @user = User.select("name").find_by(id: @post_reply.user_id) %>
+            reply to <%= @user.name %>
+          </div>
+          <%= comment.content %>
         </div>
-        <% @post.images.each do |post_photo| %>
-          <a href="<%=post_photo%>">
-            <div class="post_photo" style="background:url('<%= post_photo %>') center / contain; background-repeat:no-repeat;"></div>
-          </a>
-        <% end %>
       </div>
-
+      <% end %>
+    <% end %>
     </div>
   </div>
 </div>
