@@ -10,4 +10,17 @@ class FollowsController < ApplicationController
     @user = User.find_by(id: params[:id])
     @followers = Follow.where(target_user_id: @user.id)
   end
+
+  def create
+    @follow = Follow.new(user_id: current_user.id, target_user_id: params[:user_id])
+    @follow.save
+    redirect_to user_path(id: params[:user_id])
+  end
+
+  def destroy
+    @follow = Follow.find_by(id: params[:id])
+    @follow.destroy
+    redirect_to user_path(id: params[:user_id])
+  end
+
 end
