@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "/" => "top#top"
   get 'users/show'
   devise_for :users
 
@@ -19,5 +20,5 @@ Rails.application.routes.draw do
       get "follows" => "posts#follows"
     end
   end
-
+  
 end

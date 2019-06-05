@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:top]
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def configure_permitted_parameters
@@ -13,6 +13,6 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_out_path_for(_resource)
-    new_user_session_path # ログアウト後に遷移するpathを設定(仮)
+    "/" # ログアウト後に遷移するpathを設定(仮)
   end
 end

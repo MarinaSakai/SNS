@@ -1,0 +1,15 @@
+// Place all the styles related to the top controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.login {
+  position:absolute; left:10px; top: 15px;
+  color: white; text-decoration:none;
+}
+.signup {
+  position:absolute; right:10px; top: 15px;
+  color: white; text-decoration:none;
+}
+
+.fav_top {
+  .like-btn {color:gray}
+}

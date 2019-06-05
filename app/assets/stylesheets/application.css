@@ -26,7 +26,7 @@ body {
 
 /* Sign up and Log in */
 .account {
-  max-width:400px; margin:50px auto; color: #444;
+  max-width:400px; margin:30px auto; color: #444;
 }
 
 .account h2 {
@@ -73,6 +73,10 @@ body {
 .link_to_login, .link_to_signup {color: #1da1f2;}
 
 .forgot_password {color: #1da1f2;}
+
+.logo_top img{
+  height: 30px; padding: 5px;
+}
 
 /* header */
 .header{
