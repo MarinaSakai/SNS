@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
     # 自分のプロフィール
     if @user == current_user
-      @posts = Post.where(user_id: @user)
+      @posts = Post.where(user_id: @user).order(created_at: 'desc')
     # 他人のプロフィール
     else
       # 自分がフォローしている人だったら公開範囲がフォロワーの投稿も表示
