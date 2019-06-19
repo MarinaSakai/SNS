@@ -23,11 +23,6 @@
           <%= l(post.created_at, format: :short) %>
         </div>
         <%= link_to post.content, post_path(post), :class=> "post_content" %>
-        <div>
-          <% post.images.each do |post_photo| %>
-          <div class="post_photo" style="background:url('<%= post_photo %>') center / contain; background-repeat:no-repeat;"></div>
-          <% end %>
-        </div>
         <div class="fav_top">
           <i class="far fa-heart like-btn">
             <% @favs_count = FavsPost.where(post_id: post.id).count %>

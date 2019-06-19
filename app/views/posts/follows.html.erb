@@ -30,11 +30,6 @@
           <%= l(post_follows.created_at, format: :short) %>
         </div>
         <%= link_to post_follows.content, post_path(post_follows), :class=> "post_content" %>
-        <div>
-          <% post_follows.images.each do |post_photo| %>
-          <div class="post_photo" style="background:url('<%= post_photo %>') center / contain; background-repeat:no-repeat;"></div>
-          <% end %>
-        </div>
         <div class="fav">
           <% if @fav_post = FavsPost.find_by(post_id: post_follows.id, user_id: current_user.id) %>
           <%= link_to(post_favs_post_path(post_follows.id, @fav_post.id), :method => :delete) do %>

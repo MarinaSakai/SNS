@@ -23,13 +23,23 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    # @post.post_photos.build
+    @post.post_photos.new
   end
 
   def create
     @post = Post.new(post_params)
-    if @post.save
+    begin
+      ActiveRecord::Base.transaction do
+        photo_params[:post_photos_attributes]['0'][:image].each do |photo|
+          @post.post_photos.new(image: photo)
+        end
+        @post.save!
+      end
       redirect_to posts_path
-    else
+    rescue ActiveRecord::RecordInvalid
+      @post.post_photos = [] #0の状態に戻す
+      @post.post_photos.new
       render 'new'
     end
   end
@@ -41,6 +51,11 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:content, :scope_of_disclosure, images: []).merge(user_id: current_user.id)
+    params.require(:post).permit(:content, :scope_of_disclosure).merge(user_id: current_user.id)
   end
+
+  def photo_params
+    params.require(:post).permit(post_photos_attributes: [:image=>[]])
+  end
+
 end
