@@ -54,5 +54,13 @@
       text-decoration: none; color: gray;
     }
   }
+}
 
+.edit_users {
+  .user_container {
+    width: 60%;  padding: 30px; padding-bottom: 60px; margin: 5em auto;
+    border-radius:20px; background-color:white;
+    box-shadow: 0 0 8px lightgray; box-sizing:border-box;
+    position: relative;
+  }
 }
