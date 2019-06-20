@@ -6,4 +6,9 @@ class AdminsController < ApplicationController
     @level = User.find_by(id: current_user)
   end
 
+  def user_info
+    @user = User.find_by(id: params[:id])
+    @posts = Post.where(user_id: params[:id]).order(created_at: 'desc')
+  end
+
 end
