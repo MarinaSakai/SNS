@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get "/" => "top#top"
+  get "admin/users" => "admins#index_users"
   get 'users/show'
   devise_for :users
 
