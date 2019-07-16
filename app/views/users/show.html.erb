@@ -17,16 +17,14 @@
       </div>
     </div>
 
-    <% @posts.each do |post| %>
+    <% @posts.includes(:user).includes(:favs_posts).each do |post| %>
       <div class="posts-index-item">
         <div class="post-left">
-          <% @image = User.select("image_name").find_by(id: post.user_id) %>
-          <img src="<%= "/user_images/#{@image.image_name}" %>">
+          <img src="<%= "/user_images/#{post.user.image_name}" %>">
         </div>
         <div class="post-right">
           <div class="post-user-name">
-            <% @user = User.select("name").find_by(id: post.user_id) %>
-            <%= link_to @user.name, user_path(post.user_id) %>
+            <%= link_to post.user.name, user_path(post.user_id) %>
           </div>
           <div class="date">
             <%= l(post.created_at, format: :short) %>
@@ -38,20 +36,16 @@
             <% end %>
           </div>
           <div class="fav">
-            <% if @fav_post = FavsPost.find_by(post_id: post.id, user_id: current_user.id) %>
-            <%= link_to(post_favs_post_path(post.id, @fav_post.id), :method => :delete) do %>
-            <i class="far fa-heart unlike-btn">
-              <% @favs_count = FavsPost.where(post_id: post.id).count %>
-              <% if @favs_count != 0 %><%= @favs_count %><% end %>
-            </i>
-            <% end %>
-            <% else %>
-            <%= link_to(post_favs_posts_path(post.id), :method => :post) do %>
-            <i class="far fa-heart like-btn">
-              <% @favs_count = FavsPost.where(post_id: post.id).count %>
-              <% if @favs_count != 0 %><%= @favs_count %><% end %>
-            </i>
-            <% end %>
+            <% if (@favs_count = post.favs_posts.size) != 0 %>
+              <% if @fav_post = FavsPost.find_by(post_id: post.id, user_id: current_user.id) %>
+                <%= link_to(post_favs_post_path(post.id, @fav_post.id), :method => :delete) do %>
+                <i class="far fa-heart unlike-btn"><%= @favs_count %></i>
+                <% end %>
+              <% else %>
+                <%= link_to(post_favs_posts_path(post.id), :method => :post) do %>
+                <i class="far fa-heart like-btn"><%= @favs_count %></i>
+                <% end %>
+              <% end %>
             <% end %>
           </div>
         </div>
