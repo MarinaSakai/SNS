@@ -22,24 +22,24 @@
         </div>
         <%= @post.content %>
         <div>
-        <% @post.images.each do |post_photo| %>
-        <div class="post_photo" style="background:url('<%= post_photo %>') center / contain; background-repeat:no-repeat;"></div>
-        <% end %>
+          <% @post.images.each do |post_photo| %>
+          <div class="post_photo" style="background:url('<%= post_photo %>') center / contain; background-repeat:no-repeat;"></div>
+          <% end %>
         </div>
         <div class="fav">
-            <% if @fav_post = FavsPost.find_by(post_id: @post.id, user_id: current_user.id) %>
+          <% if @fav_post = FavsPost.find_by(post_id: @post.id, user_id: current_user.id) %>
             <%= link_to(post_favs_post_path(@post.id, @fav_post.id), :method => :delete) do %>
             <i class="far fa-heart unlike-btn">
               <% @favs_count = FavsPost.where(post_id: @post.id).count %>
               <% if @favs_count != 0 %><%= @favs_count %><% end %>
             </i>
             <% end %>
-            <% else %>
+          <% else %>
             <%= link_to(post_favs_posts_path(@post.id), :method => :post) do %>
-            <i class="far fa-heart like-btn">
-              <% @favs_count = FavsPost.where(post_id: @post.id).count %>
-              <% if @favs_count != 0 %><%= @favs_count %><% end %>
-            </i>
+              <i class="far fa-heart like-btn">
+                <% @favs_count = FavsPost.where(post_id: @post.id).count %>
+                <% if @favs_count != 0 %><%= @favs_count %><% end %>
+              </i>
             <% end %>
           <% end %>
         </div>
@@ -47,12 +47,11 @@
       <div class="reply_link">
         <%= link_to "reply",  new_post_comment_path(@post) %>
       </div>
-
     </div>
 
     <div class="comments">
     <% if @post.comments.any? %>
-      <% @post.comments.each do |comment| %>
+      <% @post.comments.includes(:favs_comments).includes(:user).each do |comment| %>
       <div class="posts-index-item">
         <div class="post-left">
           <% @image = User.select("image_name").find_by(id: comment.user_id) %>
@@ -60,32 +59,36 @@
         </div>
         <div class="post-right">
           <div class="post-user-name">
-            <% @user = User.select("name").find_by(id: comment.user_id) %>
-            <%= link_to @user.name, user_path(comment.user_id) %>
+            <% user = User.select("name").find_by(id: comment.user_id) %>
+            <%= link_to user.name, user_path(comment.user_id) %>
           </div>
           <div class="date">
             <%= l(comment.created_at, format: :short) %>
           </div>
           <div class="reply_to">
-            <% @post_reply = Post.select("user_id").find_by(id: comment.post_id) %>
-            <% @user = User.select("name").find_by(id: @post_reply.user_id) %>
             reply to <%= @user.name %>
           </div>
           <%= comment.content %>
           <div class="fav">
-            <% if @fav_comment = FavsComment.find_by(comment_id: comment.id, user_id: current_user.id) %>
-            <%= link_to(post_comment_favs_comment_path(@post.id, comment.id, @fav_comment.id), :method => :delete) do %>
-            <i class="far fa-heart unlike-btn">
-              <% @favs_count = FavsComment.where(comment_id: comment.id).count %>
-              <% if @favs_count != 0 %><%= @favs_count %><% end %>
-            </i>
-            <% end %>
+            <% if (@favs_count = comment.favs_comments.size) != 0 %>
+              <% @faved_by_current_user = false %>
+              <% comment.favs_comments.each do |favs_comment| %>
+                <% if favs_comment.user_id == current_user.id %>
+                  <%= link_to(post_comment_favs_comment_path(@post.id, comment.id, favs_comment.id), :method => :delete) do %>
+                  <i class="far fa-heart unlike-btn"><%= @favs_count %></i>
+                  <% end %>
+                  <% @faved_by_current_user = true %>
+                  <% break %>
+                <% end %>
+              <% end %>
+              <% if @faved_by_current_user == false %>
+                <%= link_to(post_comment_favs_comments_path(@post.id, comment.id), :method => :post) do %>
+                <i class="far fa-heart like-btn"><%= @favs_count %></i>
+                <% end %>
+              <% end %>
             <% else %>
               <%= link_to(post_comment_favs_comments_path(@post.id, comment.id), :method => :post) do %>
-              <i class="far fa-heart like-btn">
-                <% @favs_count = FavsComment.where(comment_id: comment.id).count %>
-                <% if @favs_count != 0 %><%= @favs_count %><% end %>
-              </i>
+              <i class="far fa-heart like-btn"></i>
               <% end %>
             <% end %>
           </div>

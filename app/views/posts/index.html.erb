@@ -34,15 +34,24 @@
         </div>
         <div class="fav">
           <% if (@favs_count = post_all.favs_posts.size) != 0 %>
-            <% if @fav_post = post_all.favs_posts.find_by(post_id: post_all.id, user_id: current_user.id) %>
-              <%= link_to(post_favs_post_path(post_all.id, @fav_post.id), :method => :delete) do %>
-
-              <i class="far fa-heart unlike-btn"><%= @favs_count %></i>
+            <% @faved_by_current_user = false %>
+            <% post_all.favs_posts.each do |favs_post| %>
+              <% if favs_post.user_id == current_user.id %>
+                <%= link_to(post_favs_post_path(post_all.id, favs_post.id), :method => :delete) do %>
+                <i class="far fa-heart unlike-btn"><%= @favs_count %></i>
+                <% end %>
+                <% @faved_by_current_user = true %>
+                <% break %>
               <% end %>
-            <% else %>
+            <% end %>
+            <% if @faved_by_current_user == false %>
               <%= link_to(post_favs_posts_path(post_all.id), :method => :post) do %>
               <i class="far fa-heart like-btn"><%= @favs_count %></i>
               <% end %>
+            <% end %>
+          <% else %>
+            <%= link_to(post_favs_posts_path(post_all.id), :method => :post) do %>
+            <i class="far fa-heart like-btn"></i>
             <% end %>
           <% end %>
         </div>
