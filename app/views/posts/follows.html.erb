@@ -13,7 +13,7 @@
       <li class="active"><%= link_to("Following", follows_posts_path) %></li>
   </ul>
 
-  <% @posts_follows.each do |post_follows| %>
+  <% @posts_follows.includes(:post_photos).each do |post_follows| %>
     <div class="posts-index-item">
       <div class="post-left">
         <% @image = User.select("image_name").find_by(id: post_follows.user_id) %>
@@ -31,8 +31,7 @@
         </div>
         <%= link_to post_follows.content, post_path(post_follows), :class=> "post_content" %>
         <br>
-        <% @photos = PostPhoto.where(post_id: post_follows.id) %>
-        <% @photos.each do |photo| %>
+        <% post_follows.post_photos.each do |photo| %>
           <div class="post_photo" style="background:url('<%= photo.image %>') center / contain; background-repeat:no-repeat;"></div>
         <% end %>
         <div class="fav">
