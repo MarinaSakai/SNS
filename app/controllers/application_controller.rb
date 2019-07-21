@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_admin
-    @user = User.find_by(id: current_user)
+    @user = current_user
     if @user.level == 1
       redirect_to posts_path
     end

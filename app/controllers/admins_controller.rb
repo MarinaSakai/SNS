@@ -3,7 +3,7 @@ class AdminsController < ApplicationController
 
   def index_users
     @users = User.all
-    @level = User.find_by(id: current_user)
+    @level = current_user
   end
 
   def user_info
