@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     # 自分のプロフィール
     if @user == current_user
       @posts = Post.where(user_id: @user).order(created_at: 'desc')
+                   .includes(:post_photos)
     # 他人のプロフィール
     else
       # 自分がフォローしている人だったら公開範囲がフォロワーの投稿も表示
@@ -17,10 +18,12 @@ class UsersController < ApplicationController
                      .or(Post.where(user_id: @user)
                                    .where(scope_of_disclosure: 'followers'))
                      .order(created_at: 'desc')
+                     .includes(:post_photos)
                else
                  Post.where(user_id: @user)
                      .where(scope_of_disclosure: 'everyone')
                      .order(created_at: 'desc')
+                     .includes(:post_photos)
                end
     end
   end

@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <% @posts.includes(:post_photos).each do |post| %>
+    <% @posts.each do |post| %>
       <div class="posts-index-item">
         <div class="post-left">
           <% @image = User.select("image_name").find_by(id: post.user_id) %>

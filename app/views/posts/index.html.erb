@@ -14,7 +14,7 @@
       <li><%= link_to("Following", "/posts/follows") %></li>
   </ul>
 
-  <% @posts_all.includes(:post_photos).each do |post_all| %>
+  <% @posts_all.each do |post_all| %>
     <div class="posts-index-item">
       <div class="post-left">
         <% @image = User.select("image_name").find_by(id: post_all.user_id) %>
