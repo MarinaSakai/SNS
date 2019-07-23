@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
 class Comment < ApplicationRecord
-  has_many :favs_posts
+  belongs_to :post
+  has_many :favs_comments
+  accepts_nested_attributes_for :favs_comments
+  belongs_to :user, class_name: "User"
 end

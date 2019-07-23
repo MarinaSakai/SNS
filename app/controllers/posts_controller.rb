@@ -13,6 +13,7 @@ class PostsController < ApplicationController
                           .where(scope_of_disclosure: 'followers'))
                      .order(created_at: 'desc')
                      .includes(:post_photos)
+                     .includes(:user).includes(:favs_posts)
   end
 
   def follows
@@ -21,6 +22,7 @@ class PostsController < ApplicationController
     @follows = Follow.select('target_user_id').where(user_id: current_user)
     @posts_follows = Post.where(user_id: @follows).where.not(scope_of_disclosure: 'self').order(created_at: 'desc')
                          .includes(:post_photos)
+                         .includes(:user).includes(:favs_posts)
   end
 
   def new
@@ -49,6 +51,11 @@ class PostsController < ApplicationController
   def show
     @post = Post.find_by(id: params[:id])
     @photos = PostPhoto.where(post_id: @post.id)
+    @image = User.select("image_name").find_by(id: @post.user_id)
+    @user = User.select("name").find_by(id: @post.user_id)
+    @fav_post = FavsPost.find_by(post_id: @post.id, user_id: current_user.id)
+    @favs_count = FavsPost.where(post_id: @post.id).count
+    @comments = @post.comments.includes(:favs_comments).includes(:user)
   end
 
   private
