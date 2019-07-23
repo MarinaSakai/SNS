@@ -34,7 +34,7 @@
         <div class="date">
           <%= l(post.created_at, format: :short) %>
         </div>
-        <%= link_to post.content, post_path(post), :class=> "post_content" %>
+        <%= post.content %>
         <br>
         <% post.post_photos.each do |photo| %>
           <div class="post_photo" style="background:url('<%= photo.image %>') center / contain; background-repeat:no-repeat;"></div>
