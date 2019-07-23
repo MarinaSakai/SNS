@@ -98,6 +98,10 @@ body {
   position:absolute; left:10px; top: 15px;
   color: white; text-decoration:none; font-size: 17px;
 }
+.header .link_to_admin {
+  position:absolute; left:80px; top: 15px;
+  color: white; text-decoration:none; font-size: 17px;
+}
 /* //header */
 
 a.new_post {
