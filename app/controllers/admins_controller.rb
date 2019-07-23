@@ -11,5 +11,4 @@ class AdminsController < ApplicationController
     @posts = Post.where(user_id: params[:id]).order(created_at: 'desc')
                  .includes(:user).includes(:post_photos)
   end
-
 end
