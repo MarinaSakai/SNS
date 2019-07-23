@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   get "/" => "top#top"
-  get "admin/users" => "admins#index_users"
-  get "admin/users/:id" => "admins#user_info"
   get 'users/show'
   devise_for :users
+
+  namespace :admins do
+    get "users" => :index_users
+    get "users/:id" => :user_info
+  end
 
   resources :users, :only => [:show, :edit, :update] do
     resources :follows, controller:'follows', except: [:index, :new, :edit, :show, :update]
