@@ -6,4 +6,5 @@ class Post < ApplicationRecord
   mount_uploaders :images, ImageUploader
   has_many :comments
   has_many :favs_posts
+  belongs_to :user
 end
