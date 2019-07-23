@@ -15,4 +15,11 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(_resource)
     "/" # ログアウト後に遷移するpathを設定(仮)
   end
+
+  def authenticate_admin
+    @user = current_user
+    if @user.level == 1
+      redirect_to posts_path
+    end
+  end
 end
