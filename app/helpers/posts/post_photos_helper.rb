@@ -1,0 +1,2 @@
+module Posts::PostPhotosHelper
+end

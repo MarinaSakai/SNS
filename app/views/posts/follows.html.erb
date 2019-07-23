@@ -2,6 +2,9 @@
   <div class="header">
     <span class="title">Home</span>
     <%= link_to "Logout", destroy_user_session_path, method: :delete, :class=> "logout" %>
+    <% if @user.level == 0 %>
+      <%= link_to "admin", admins_users_path, :class=> "link_to_admin" %>
+    <% end %>
     <%= link_to user_path(current_user) do %>
       <img class="my_image" src="<%= "/user_images/#{@user.image_name}" %>">
     <% end %>
@@ -28,11 +31,10 @@
           <%= l(post_follows.created_at, format: :short) %>
         </div>
         <%= link_to post_follows.content, post_path(post_follows), :class=> "post_content" %>
-        <div>
-          <% post_follows.images.each do |post_photo| %>
-          <div class="post_photo" style="background:url('<%= post_photo %>') center / contain; background-repeat:no-repeat;"></div>
-          <% end %>
-        </div>
+        <br>
+        <% post_follows.post_photos.each do |photo| %>
+          <div class="post_photo" style="background:url('<%= photo.image %>') center / contain; background-repeat:no-repeat;"></div>
+        <% end %>
         <div class="fav">
           <% if (@favs_count = post_follows.favs_posts.size) != 0 %>
             <% @faved_by_current_user = false %>

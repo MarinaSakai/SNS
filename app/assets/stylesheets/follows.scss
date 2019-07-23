@@ -1,0 +1,32 @@
+// Place all the styles related to the follows controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.back_to_user {
+  position:absolute; left:15px; top: 15px;
+  color: white; text-decoration:none; font-size: 18px;
+}
+
+.user-index {
+  box-sizing: border-box; width: 60%; margin: 80px auto;
+  overflow: hidden; display: flex; flex-wrap: wrap;
+  .user-index-box {
+    width: 33.3%;
+    .user-index-item {
+      height:80px; margin: 10px; position: relative; background-color: white;
+      border-radius: 5%; box-shadow: 0 0 5px lightgray;
+      .user-left {
+        width: 10%; box-sizing: border-box; background-color: white;
+        img {
+          width: 50px; height: 50px; border-radius: 50%;
+          object-fit: cover; position: absolute; left: 20px; top: 15px;
+        }
+      }
+      .user-right {
+        box-sizing: border-box; font-size: 18px; font-weight: bold;
+        position: absolute; left: 85px; top: 25px;
+        a {text-decoration: none; color: rgba(45, 43, 47, 0.92);}
+      }
+    }
+  }
+}

@@ -3,6 +3,9 @@
   <div class="header">
     <span class="title">Home</span>
     <%= link_to "Logout", destroy_user_session_path, method: :delete, :class=> "logout" %>
+    <% if @user.level == 0 %>
+      <%= link_to "admin", admins_users_path, :class=> "link_to_admin" %>
+    <% end %>
     <%= link_to user_path(current_user) do %>
       <img class="my_image" src="<%= "/user_images/#{@user.image_name}" %>">
     <% end %>
@@ -17,7 +20,9 @@
   <% @posts_all.each do |post_all| %>
     <div class="posts-index-item">
       <div class="post-left">
-        <img src="<%= "/user_images/#{post_all.user.image_name}" %>">
+        <%= link_to user_path(post_all.user_id) do %>
+          <img src="<%= "/user_images/#{post_all.user.image_name}" %>">
+        <% end %>
       </div>
       <div class="post-right">
         <div class="post-user-name">
@@ -27,11 +32,11 @@
           <%= l(post_all.created_at, format: :short) %>
         </div>
         <%= link_to post_all.content, post_path(post_all), :class=> "post_content" %>
-        <div>
-          <% post_all.images.each do |post_photo| %>
-            <div class="post_photo" style="background:url('<%= post_photo %>') center / contain; background-repeat:no-repeat;"></div>
-          <% end %>
-        </div>
+        <br>
+        <% post_all.post_photos.each do |photo| %>
+          <div class="post_photo" style="background:url('<%= photo.image %>') center / contain; background-repeat:no-repeat;"></div>
+        <% end %>
+        
         <div class="fav">
           <% if (post_all.favs_posts.size) != 0 %>
             <% @faved_by_current_user = false %>
