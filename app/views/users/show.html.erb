@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <% @posts.includes(:user).includes(:favs_posts).each do |post| %>
+    <% @posts.each do |post| %>
       <div class="posts-index-item">
         <div class="post-left">
           <img src="<%= "/user_images/#{post.user.image_name}" %>">

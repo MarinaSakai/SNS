@@ -50,17 +50,15 @@
     </div>
 
     <div class="comments">
-    <% if @post.comments.any? %>
-      <% @post.comments.includes(:favs_comments).each do |comment| %>
+    <% if @comments.any? %>
+      <% @comments.each do |comment| %>
       <div class="posts-index-item">
         <div class="post-left">
-          <% @image = User.select("image_name").find_by(id: comment.user_id) %>
-          <img src="<%= "/user_images/#{@image.image_name}" %>">
+          <img src="<%= "/user_images/#{comment.user.image_name}" %>">
         </div>
         <div class="post-right">
           <div class="post-user-name">
-            <% user = User.select("name").find_by(id: comment.user_id) %>
-            <%= link_to user.name, user_path(comment.user_id) %>
+            <%= link_to comment.user.name, user_path(comment.user_id) %>
           </div>
           <div class="date">
             <%= l(comment.created_at, format: :short) %>
@@ -70,12 +68,12 @@
           </div>
           <%= comment.content %>
           <div class="fav">
-            <% if (@favs_count = comment.favs_comments.size) != 0 %>
+            <% if (comment.favs_comments.size) != 0 %>
               <% @faved_by_current_user = false %>
               <% comment.favs_comments.each do |favs_comment| %>
                 <% if favs_comment.user_id == current_user.id %>
                   <%= link_to(post_comment_favs_comment_path(@post.id, comment.id, favs_comment.id), :method => :delete) do %>
-                  <i class="far fa-heart unlike-btn"><%= @favs_count %></i>
+                  <i class="far fa-heart unlike-btn"><%= comment.favs_comments.size %></i>
                   <% end %>
                   <% @faved_by_current_user = true %>
                   <% break %>
@@ -83,7 +81,7 @@
               <% end %>
               <% if @faved_by_current_user == false %>
                 <%= link_to(post_comment_favs_comments_path(@post.id, comment.id), :method => :post) do %>
-                <i class="far fa-heart like-btn"><%= @favs_count %></i>
+                <i class="far fa-heart like-btn"><%= comment.favs_comments.size %></i>
                 <% end %>
               <% end %>
             <% else %>
