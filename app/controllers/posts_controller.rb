@@ -12,6 +12,7 @@ class PostsController < ApplicationController
                      .or(Post.where(user_id: @follows)
                           .where(scope_of_disclosure: 'followers'))
                      .order(created_at: 'desc')
+                     .includes(:user).includes(:favs_posts)
   end
 
   def follows
@@ -19,6 +20,7 @@ class PostsController < ApplicationController
     # フォローしている人たちのリスト
     @follows = Follow.select('target_user_id').where(user_id: current_user)
     @posts_follows = Post.where(user_id: @follows).where.not(scope_of_disclosure: 'self').order(created_at: 'desc')
+                         .includes(:user).includes(:favs_posts)
   end
 
   def new

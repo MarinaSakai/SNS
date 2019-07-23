@@ -51,7 +51,7 @@
 
     <div class="comments">
     <% if @post.comments.any? %>
-      <% @post.comments.includes(:favs_comments).includes(:user).each do |comment| %>
+      <% @post.comments.includes(:favs_comments).each do |comment| %>
       <div class="posts-index-item">
         <div class="post-left">
           <% @image = User.select("image_name").find_by(id: comment.user_id) %>

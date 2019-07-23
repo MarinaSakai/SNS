@@ -14,7 +14,7 @@
       <li><%= link_to("Following", "/posts/follows") %></li>
   </ul>
 
-  <% @posts_all.includes(:user).includes(:favs_posts).each do |post_all| %>
+  <% @posts_all.each do |post_all| %>
     <div class="posts-index-item">
       <div class="post-left">
         <img src="<%= "/user_images/#{post_all.user.image_name}" %>">
@@ -33,12 +33,12 @@
           <% end %>
         </div>
         <div class="fav">
-          <% if (@favs_count = post_all.favs_posts.size) != 0 %>
+          <% if (post_all.favs_posts.size) != 0 %>
             <% @faved_by_current_user = false %>
             <% post_all.favs_posts.each do |favs_post| %>
               <% if favs_post.user_id == current_user.id %>
                 <%= link_to(post_favs_post_path(post_all.id, favs_post.id), :method => :delete) do %>
-                <i class="far fa-heart unlike-btn"><%= @favs_count %></i>
+                <i class="far fa-heart unlike-btn"><%= post_all.favs_posts.size %></i>
                 <% end %>
                 <% @faved_by_current_user = true %>
                 <% break %>
@@ -46,7 +46,7 @@
             <% end %>
             <% if @faved_by_current_user == false %>
               <%= link_to(post_favs_posts_path(post_all.id), :method => :post) do %>
-              <i class="far fa-heart like-btn"><%= @favs_count %></i>
+              <i class="far fa-heart like-btn"><%= post_all.favs_posts.size %></i>
               <% end %>
             <% end %>
           <% else %>
