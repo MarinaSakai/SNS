@@ -2,6 +2,7 @@
   <div class="new_post">
   <div class="header">
     <span class="title">Create Post</span>
+    <%= link_to "Logout", destroy_user_session_path, method: :delete, :class=> "logout" %>
     <%= link_to posts_path, :class=>"back_to_posts" do %>
       <i class="fas fa-home"></i> <span class="home_button">Home</span>
     <% end %>
@@ -13,10 +14,12 @@
         <span class="error"><%= @post.errors.messages[:content][0] %></span>
       <% end %>
       <%= f.text_area :content, class: "new_post_form", placeholder: "What's happning?" %>
-      <%= f.file_field :images, class: "new_post_photos", multiple: true %>
+      <%= f.fields_for :post_photos do |ph| %>
+        <%= ph.file_field :image, class: "new_post_photos", multiple: true %>
+      <% end %>
       <br><p style="font-size:7px; margin:0;">(max:3files)</p>
 
-      <a class="select_scope_style">Post</a>
+      <input type="button" value="Post" href="#" class="select_scope_style">
 
       <div class="select_scope_back"></div>
       <div class="select_scope">

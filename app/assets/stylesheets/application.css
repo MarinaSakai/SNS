@@ -26,7 +26,7 @@ body {
 
 /* Sign up and Log in */
 .account {
-  max-width:400px; margin:50px auto; color: #444;
+  max-width:400px; margin:30px auto; color: #444;
 }
 
 .account h2 {
@@ -74,7 +74,9 @@ body {
 
 .forgot_password {color: #1da1f2;}
 
-
+.logo_top img{
+  height: 30px; padding: 5px;
+}
 
 /* header */
 .header{
@@ -94,7 +96,11 @@ body {
 }
 .header .back_to_post {
   position:absolute; left:10px; top: 15px;
-  color: white; text-decoration:none;
+  color: white; text-decoration:none; font-size: 17px;
+}
+.header .link_to_admin {
+  position:absolute; left:80px; top: 15px;
+  color: white; text-decoration:none; font-size: 17px;
 }
 /* //header */
 

@@ -1,0 +1,28 @@
+<div class="background-box">
+  <div class="index_followers">
+    <div class="header">
+      <span class="title">Followers</span>
+      <%= link_to "back", user_path(params[:id]), :class=>"back_to_user"%>
+    </div>
+
+    <div class="user-index">
+      <% @followers.each do |follower| %>
+        <div class="user-index-box">
+          <div class="user-index-item">
+            <div class="user-left">
+              <%= link_to user_path(follower.user.id) do %>
+                <img src="<%= "/user_images/#{follower.user.image_name}" %>">
+              <% end %>
+            </div>
+            <div class="user-right">
+              <%= link_to user_path(follower.user.id) do %>
+                <%= follower.user.name %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>
