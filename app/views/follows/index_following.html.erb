@@ -9,16 +9,14 @@
       <% @follows.each do |follow| %>
         <div class="user-index-box">
           <div class="user-index-item">
-            <% @user = User.find_by(id: follow.target_user_id) %>
             <div class="user-left">
-              <% @image = User.select("image_name").find_by(id: @user.id) %>
-              <%= link_to user_path(@user.id) do %>
-                <img src="<%= "/user_images/#{@image.image_name}" %>">
+              <%= link_to user_path(follow.target_user.id) do %>
+                <img src="<%= "/user_images/#{follow.target_user.image_name}" %>">
               <% end %>
             </div>
             <div class="user-right">
-              <%= link_to user_path(@user.id) do %>
-                <%= @user.name %>
+              <%= link_to user_path(follow.target_user.id) do %>
+                <%= follow.target_user.name %>
               <% end %>
             </div>
           </div>
