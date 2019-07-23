@@ -14,7 +14,7 @@
   <div class="users_list">
     <% @users.each do |user| %>
       <div class="users-index-item">
-        <%= link_to "users/#{user.id}", :class=>"link_to_user_info" do %>
+        <%= link_to admins_user_path(user), :class=>"link_to_user_info" do %>
           id: <%= user.id %>&nbsp;&nbsp;<%= user.name %>
         <% end %>
       </div>

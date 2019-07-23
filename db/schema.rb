@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2019_06_20_061818) do
     t.datetime "updated_at", null: false
     t.string "name", default: "", null: false
     t.string "image_name", default: "default_user.jpeg"
-    t.integer "level"
+    t.integer "level", default: 1
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

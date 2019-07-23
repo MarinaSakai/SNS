@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :admins do
-    get "users" => :index_users
-    get "users/:id" => :user_info
+    resources :users, :only => [:index, :show] do
+    end
   end
 
   resources :users, :only => [:show, :edit, :update] do
@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get "index_followers" => "follows#index_followers"
     end
   end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :posts do
     resources :post_photos, controller:'posts/post_photos', except: [:edit, :show, :update, :destroy]
