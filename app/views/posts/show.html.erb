@@ -3,8 +3,15 @@
     <div class="header">
       <span class="title">Post</span>
       <%= link_to "Logout", destroy_user_session_path, method: :delete, :class=> "logout" %>
-      <%= link_to posts_path, :class=>"back_to_posts" do %>
-        <i class="fas fa-home"></i> <span class="home_button">Home</span>
+      <% if current_user.level == 1 %>
+        <%= link_to posts_path, :class=>"back_to_posts" do %>
+          <i class="fas fa-home"></i> <span class="home_button">Home</span>
+        <% end %>
+      <% else %>
+        <%= link_to "admin", admins_users_path, :class=> "link_to_admin" %>
+        <%= link_to posts_path, :class=>"back_to_posts_admin" do %>
+          <i class="fas fa-home"></i> <span class="home_button">Home</span>
+        <% end %>
       <% end %>
     </div>
 
@@ -24,11 +31,10 @@
           <%= l(@post.created_at, format: :short) %>
         </div>
         <%= @post.content %>
-        <div>
-        <% @post.images.each do |post_photo| %>
-        <div class="post_photo" style="background:url('<%= post_photo %>') center / contain; background-repeat:no-repeat;"></div>
+        <br>
+        <% @photos.each do |photo| %>
+          <div class="post_photo" style="background:url('<%= photo.image %>') center / contain; background-repeat:no-repeat;"></div>
         <% end %>
-        </div>
         <div class="fav">
             <% if @fav_post = FavsPost.find_by(post_id: @post.id, user_id: current_user.id) %>
             <%= link_to(post_favs_post_path(@post.id, @fav_post.id), :method => :delete) do %>
