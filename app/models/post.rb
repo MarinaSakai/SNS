@@ -6,4 +6,5 @@ class Post < ApplicationRecord
   accepts_nested_attributes_for :post_photos
   has_many :comments
   has_many :favs_posts
+  belongs_to :user
 end

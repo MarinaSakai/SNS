@@ -23,23 +23,20 @@
   <% @posts.each do |post| %>
     <div class="posts-index-item">
       <div class="post-left">
-        <% @image = User.select("image_name").find_by(id: post.user_id) %>
         <%= link_to user_path(post.user_id) do %>
-          <img src="<%= "/user_images/#{@image.image_name}" %>">
+          <img src="<%= "/user_images/#{post.user.image_name}" %>">
         <% end %>
       </div>
       <div class="post-right">
         <div class="post-user-name">
-          <% @user = User.select("name").find_by(id: post.user_id) %>
-          <%= link_to @user.name, user_path(post.user_id) %>
+          <%= link_to post.user.name, user_path(post.user_id) %>
         </div>
         <div class="date">
           <%= l(post.created_at, format: :short) %>
         </div>
         <%= link_to post.content, post_path(post), :class=> "post_content" %>
         <br>
-        <% @photos = PostPhoto.where(post_id: post.id) %>
-        <% @photos.each do |photo| %>
+        <% post.post_photos.each do |photo| %>
           <div class="post_photo" style="background:url('<%= photo.image %>') center / contain; background-repeat:no-repeat;"></div>
         <% end %>
       </div>
