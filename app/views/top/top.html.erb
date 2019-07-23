@@ -6,7 +6,7 @@
   </div>
 
   <div style="padding: 20px;"></div>
-  <% @posts.each do |post| %>
+  <% @posts.includes(:user).includes(:favs_posts).each do |post| %>
     <div class="posts-index-item">
       <div class="post-left">
         <%= link_to user_path(post.user_id) do %>
