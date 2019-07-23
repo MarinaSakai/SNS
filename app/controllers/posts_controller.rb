@@ -38,6 +38,10 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by(id: params[:id])
+    @image = User.select("image_name").find_by(id: @post.user_id)
+    @user = User.select("name").find_by(id: @post.user_id)
+    @fav_post = FavsPost.find_by(post_id: @post.id, user_id: current_user.id)
+    @favs_count = FavsPost.where(post_id: @post.id).count
     @comments = @post.comments.includes(:favs_comments).includes(:user)
   end
 
