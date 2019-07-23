@@ -3,7 +3,7 @@
     <span class="title">Home</span>
     <%= link_to "Logout", destroy_user_session_path, method: :delete, :class=> "logout" %>
     <% if @user.level == 0 %>
-      <%= link_to "admin", admin_users_path, :class=> "link_to_admin" %>
+      <%= link_to "admin", admins_users_path, :class=> "link_to_admin" %>
     <% end %>
     <%= link_to user_path(current_user) do %>
       <img class="my_image" src="<%= "/user_images/#{@user.image_name}" %>">
