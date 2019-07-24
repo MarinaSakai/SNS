@@ -35,8 +35,10 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     begin
       ActiveRecord::Base.transaction do
-        photo_params[:post_photos_attributes]['0'][:image].each do |photo|
-          @post.post_photos.new(image: photo)
+        if photo_params[:post_photos_attributes] != nil
+          photo_params[:post_photos_attributes]['0'][:image].each do |photo|
+            @post.post_photos.new(image: photo)
+          end
         end
         @post.save!
       end
